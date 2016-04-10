@@ -1,0 +1,25 @@
+{
+  "name": "generate-invoice",
+  "version": "0.0.0",
+  "description": "Generates PDF invoices",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "invoice",
+    "generator"
+  ],
+  "author": "Juho Vepsäläinen",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "html-pdf": "^2.0.1",
+    "moment": "^2.12.0",
+    "node-jsx": "^0.13.3",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
+  }
+}

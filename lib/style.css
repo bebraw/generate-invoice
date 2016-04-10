@@ -1,0 +1,141 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+    font-size: 1em;
+    font-family: arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    overflow: auto;
+}
+
+.preview {
+    overflow: hidden;
+    padding: 1em;
+    margin: 0;
+}
+
+fieldset {
+    border: none;
+}
+
+.form-subsection {
+    padding: 0.5em;
+    margin: 0.5em 0;
+}
+
+.form-section-title {
+    font-weight: bold;
+}
+
+.form-element label {
+    float: left;
+    clear: left;
+    text-align: right;
+    width: 8em;
+    margin-right: 1em;
+}
+
+.form-element:after {
+    clear: both;
+    content: " ";
+    visibility: hidden;
+    display: block;
+    height: 0;
+}
+
+/* preview */
+header {
+    overflow: auto;
+    margin-bottom: 4em;
+}
+
+header .sender {
+    float: left;
+}
+
+header .extra {
+    float: right;
+
+    text-align: left;
+}
+header .extra .label {
+    display: inline-block;
+    width: 9em;
+    margin-right: 1em;
+}
+header .extra .invoice {
+    text-transform: uppercase;
+    text-align: right;
+    margin-bottom: 1em;
+}
+
+article, .info {
+    margin-bottom: 4em;
+}
+
+.products {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.products th, .products td {
+    margin: 0;
+    padding: 0.3em;
+}
+
+.products th {
+    font-weight: normal;
+}
+
+.products th, .products td {
+    text-align: right;
+}
+
+.products tr:nth-last-child(2) td, .products tr:last-child td {
+    border-bottom: none;
+}
+
+.products thead tr th {
+    font-weight: bold;
+}
+
+.products thead th:first-child, .products tbody th:first-child, thead .products td:first-child, tbody .products td:first-child {
+    text-align: left;
+}
+
+.products tbody {
+    border-bottom: 0.1em solid black;
+}
+
+.products tbody td {
+    text-align: left;
+}
+
+.products tbody td:last-child {
+    text-align: right;
+}
+
+.products tfoot td {
+    text-align: right;
+}
+
+.invoice {
+    font-weight: bold;
+}
+
+/* hide unnecessary bits on print and make sure preview is fullsized */
+@media print {
+    .fields, .handle {
+        display: none;
+    }
+
+    .preview {
+        margin: 0;
+    }
+}
