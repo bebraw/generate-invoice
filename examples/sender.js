@@ -7,5 +7,6 @@ module.exports = {
   country: 'Awesomeland',
   phone: '+1234567890',
   iban: 'AW12 4567 8901',
+  bic: 'FOOBAR',
   companyId: '123456-7'
 };
