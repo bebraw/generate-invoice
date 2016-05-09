@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const path = require('path');
 const render = require('./lib').render;
 
 if(require.main === module) {
@@ -11,6 +12,7 @@ else {
 function main(invoice) {
   const program = require('commander');
   const pkg = require('./package.json');
+  const cwd = process.cwd();
 
   program.version(pkg.version).
     description(pkg.description).
@@ -23,21 +25,27 @@ function main(invoice) {
     parse(process.argv);
 
   if(program.sender) {
-    program.sender = require(program.sender);
+    program.sender = require(
+      path.join(cwd, program.sender)
+    );
   }
   else {
     return console.error('Missing sender');
   }
 
   if(program.recipient) {
-    program.recipient = require(program.recipient);
+    program.recipient = require(
+      path.join(cwd, program.recipient)
+    );
   }
   else {
     return console.error('Missing recipient');
   }
 
   if(program.invoice) {
-    program.invoice = require(program.invoice);
+    program.invoice = require(
+      path.join(cwd, program.invoice)
+    );
   }
   else {
     return console.error('Missing invoice');
