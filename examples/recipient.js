@@ -6,6 +6,5 @@ module.exports = {
   city: 'Greatcity',
   country: 'Greatland',
   phone: '+0987654321',
-  iban: 'GR98 7654 32',
   companyId: '987654-3'
 };
