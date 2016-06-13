@@ -75,14 +75,15 @@ module.exports = function(ctx) {
                 <span>{invoice.date}</span>
               </div>
               <div className="reference">
-                <span className="label">{i18n.invoiceReference}:</span>
+                <span className="label">{invoiceType === 'invoice' ?
+                  i18n.invoiceReference : i18n.creditNoteReference}:</span>
                 <span>{invoice.reference}</span>
               </div>
               {invoice.warningTerm && <div className="paymentTerm">
                 <span className="label">{i18n.paymentTerm}:</span>
                 <span>{invoice.paymentTerm}</span>
               </div>}
-              {invoice.type === 'invoice' && invoice.due && <div className="due">
+              {invoiceType === 'invoice' && invoice.due && <div className="due">
                 <span className="label">{i18n.due}:</span>
                 <span>{invoice.due}</span>
               </div>}
@@ -126,18 +127,18 @@ module.exports = function(ctx) {
               </tbody>
               <tfoot>
                 <tr>
-                  <td>{invoice.type === 'invoice' ? i18n.brutto : i18n.subtotal}</td>
+                  <td>{invoiceType === 'invoice' ? i18n.brutto : i18n.subtotal}</td>
                   <td>{currency(summaries.price.toFixed(2))}</td>
                 </tr>
-                {invoice.type === 'invoice' && <tr>
+                {invoiceType === 'invoice' && <tr>
                   <td>{i18n.vat}</td>
                   <td>{(vat * 100).toFixed(0) + '%'}</td>
                 </tr>}
-                {invoice.type === 'invoice' && <tr>
+                {invoiceType === 'invoice' && <tr>
                   <td>{i18n.tax}</td>
                   <td>{currency(summaries.tax.toFixed(2))}</td>
                 </tr>}
-                {invoice.type === 'invoice' && <tr>
+                {invoiceType === 'invoice' && <tr>
                   <td>{i18n.other}</td>
                   <td>{currency(0)}</td>
                 </tr>}
