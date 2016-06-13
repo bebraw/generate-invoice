@@ -45,6 +45,8 @@ module.exports = function(ctx) {
     }, 0)
   };
 
+  const invoiceType = invoice.type || 'invoice';
+
   return (
     <html>
       <head>
@@ -61,13 +63,13 @@ module.exports = function(ctx) {
               <div className="address">{sender.address}</div>
               <div className="city">{sender.postalCode} {sender.city}</div>
               <div className="country">{sender.country}</div>
-              <div className="phone">{i18n.phone}: {sender.phone}</div>
-              <div className="iban">IBAN: {sender.iban}</div>
+              {invoiceType === 'invoice' && <div className="phone">{i18n.phone}: {sender.phone}</div>}
+              {invoiceType === 'invoice' && <div className="iban">IBAN: {sender.iban}</div>}
               {sender.bic ? <div className="bic">BIC/SWIFT: {sender.bic}</div> : null }
               <div className="companyId">{i18n.companyId}: {sender.companyId}</div>
             </div>
             <div className="extra">
-              <div className="invoice">{i18n.invoice}</div>
+              <div className="invoice">{i18n[invoiceType]}</div>
               <div className="date">
                 <span className="label">{i18n.date}:</span>
                 <span>{invoice.date}</span>
@@ -76,23 +78,23 @@ module.exports = function(ctx) {
                 <span className="label">{i18n.invoiceReference}:</span>
                 <span>{invoice.reference}</span>
               </div>
-              <div className="paymentTerm">
+              {invoice.warningTerm && <div className="paymentTerm">
                 <span className="label">{i18n.paymentTerm}:</span>
                 <span>{invoice.paymentTerm}</span>
-              </div>
-              <div className="due">
+              </div>}
+              {invoice.type === 'invoice' && invoice.due && <div className="due">
                 <span className="label">{i18n.due}:</span>
                 <span>{invoice.due}</span>
-              </div>
+              </div>}
               <div className="blank">&nbsp;</div>
-              <div className="warningTerm">
+              {invoice.warningTerm && <div className="warningTerm">
                 <span className="label">{i18n.warningTerm}:</span>
                 <span>{invoice.warningTerm}</span>
-              </div>
-              <div className="interest">
+              </div>}
+              {invoice.interest && <div className="interest">
                 <span className="label">{i18n.interest}:</span>
                 <span>{invoice.interest}%</span>
-              </div>
+              </div>}
             </div>
           </header>
           <article>
@@ -124,21 +126,21 @@ module.exports = function(ctx) {
               </tbody>
               <tfoot>
                 <tr>
-                  <td>{i18n.brutto}</td>
+                  <td>{invoice.type === 'invoice' ? i18n.brutto : i18n.subtotal}</td>
                   <td>{currency(summaries.price.toFixed(2))}</td>
                 </tr>
-                <tr>
+                {invoice.type === 'invoice' && <tr>
                   <td>{i18n.vat}</td>
                   <td>{(vat * 100).toFixed(0) + '%'}</td>
-                </tr>
-                <tr>
+                </tr>}
+                {invoice.type === 'invoice' && <tr>
                   <td>{i18n.tax}</td>
                   <td>{currency(summaries.tax.toFixed(2))}</td>
-                </tr>
-                <tr>
+                </tr>}
+                {invoice.type === 'invoice' && <tr>
                   <td>{i18n.other}</td>
                   <td>{currency(0)}</td>
-                </tr>
+                </tr>}
                 <tr>
                   <td>{i18n.total}</td>
                   <td>{currency(summaries.total.toFixed(2))}</td>
