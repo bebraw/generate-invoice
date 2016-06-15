@@ -65,7 +65,7 @@ module.exports = function(ctx) {
               <div className="country">{sender.country}</div>
               {invoiceType === 'invoice' && <div className="phone">{i18n.phone}: {sender.phone}</div>}
               {invoiceType === 'invoice' && <div className="iban">IBAN: {sender.iban}</div>}
-              {sender.bic ? <div className="bic">BIC/SWIFT: {sender.bic}</div> : null }
+              {(invoiceType === 'invoice' && sender.bic) && <div className="bic">BIC/SWIFT: {sender.bic}</div> }
               <div className="companyId">{i18n.companyId}: {sender.companyId}</div>
             </div>
             <div className="extra">
